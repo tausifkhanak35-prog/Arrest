@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#170410">
+<title>You’re going to get arrested🌹</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   THEME
+   ============================================================ */
+:root{
+  --bg-1:#170410;
+  --bg-2:#0d0209;
+  --rose:#e8476f;
+  --rose-2:#ff8fa8;
+  --gold:#e8c07d;
+  --cream:#fff3ea;
+  --muted:rgba(255,243,234,.72);
+  --line:rgba(232,192,125,.26);
+  --radius:22px;
+  --ease:cubic-bezier(.22,.8,.25,1);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; min-height:100%; }
+body{
+  font-family:"Poppins",system-ui,-apple-system,sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(circle at 18% 0%, #4a1226 0%, transparent 55%),
+    radial-gradient(circle at 88% 12%, #3a0d22 0%, transparent 50%),
+    radial-gradient(circle at 50% 115%, #52122c 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2) 70%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============================================================
+   SCREENS
+   ============================================================ */
+.screen{
+  position:fixed; inset:0; z-index:1;
+  display:flex; overflow-y:auto;
+  padding:clamp(18px,4vw,32px) 16px;
+  opacity:0; visibility:hidden;
+  transition:opacity .8s var(--ease), visibility .8s;
+}
+.screen > *{ margin:auto; }
+.screen.active{ opacity:1; visibility:visible; }
+.screen--full{ padding:0; }
+.screen--full > .chase{ margin:0; flex:1; width:100%; min-height:100dvh; }
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card{
+  width:min(100%,620px);
+  background:linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:clamp(22px,5.5vw,46px);
+  text-align:center;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+.script{ font-family:"Great Vibes",cursive; font-weight:400; }
+.big{ font-size:clamp(2.6rem,9vw,3.6rem); line-height:1.1; margin:.1em 0 .4em; }
+.huge{ font-size:clamp(2rem,7.5vw,3rem); line-height:1.15; }
+.accent{ color:var(--rose-2); }
+h1,h2{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:600; letter-spacing:.2px;
+}
+h2{ font-size:clamp(1.55rem,5.2vw,2.3rem); line-height:1.25; margin:.25em 0 .55em; }
+.kicker{
+  margin:0 0 1rem; font-size:.72rem; font-weight:500;
+  letter-spacing:.28em; text-transform:uppercase;
+  color:var(--gold);
+}
+.lead{
+  font-size:clamp(.98rem,3.4vw,1.1rem);
+  line-height:1.8; color:var(--muted); margin:.5em 0 1.2em;
+}
+.lead.small{ font-size:clamp(.9rem,3vw,1rem); }
+.note{ min-height:1.4em; margin:.9em 0 0; font-size:.86rem; color:var(--rose-2); }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  font-family:inherit; font-size:.94rem; font-weight:500;
+  padding:.85rem 1.7rem; border-radius:999px;
+  border:1px solid transparent; cursor:pointer;
+  transition:transform .25s var(--ease), box-shadow .25s, background .25s, border-color .25s;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:active{ transform:scale(.97); }
+.btn-primary{
+  background:linear-gradient(135deg,#ff6b8d,#d31d4c);
+  color:#fff; box-shadow:0 12px 30px rgba(211,29,76,.38);
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 18px 42px rgba(211,29,76,.52); }
+.btn-ghost{ background:transparent; border-color:var(--line); color:var(--cream); }
+.btn-ghost:hover{ background:rgba(255,255,255,.06); }
+.wide{ width:100%; margin-top:.6rem; }
+.row{ display:flex; flex-wrap:wrap; gap:.7rem; justify-content:center; }
+
+/* ============================================================
+   FLOWERS (pure CSS roses)
+   ============================================================ */
+.flower{ position:relative; width:110px; height:110px; }
+.petal{
+  position:absolute; left:50%; top:50%;
+  width:40px; height:58px;
+  margin-left:-20px; margin-top:-58px;
+  border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;
+  transform-origin:50% 100%;
+  transform:rotate(var(--r,0deg));
+  box-shadow:inset 0 -4px 10px rgba(0,0,0,.18);
+}
+.petal--inner{
+  width:28px; height:40px; margin-left:-14px; margin-top:-40px;
+  transform:rotate(var(--r,0deg)) scale(.92);
+  filter:brightness(.82);
+}
+.core{
+  position:absolute; left:50%; top:50%;
+  width:22px; height:22px; margin:-11px 0 0 -11px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffe9b0,#d9a441);
+  box-shadow:0 0 18px rgba(232,192,125,.65);
+}
+.flower.rose  .petal{ background:radial-gradient(circle at 50% 80%,#ff7d97 0%,#e0325c 45%,#a3163c 100%); }
+.flower.blush .petal{ background:radial-gradient(circle at 50% 80%,#ffe0e7 0%,#ff9ab4 45%,#e26a8a 100%); }
+.flower.cream .petal{ background:radial-gradient(circle at 50% 80%,#fffdf6 0%,#f6e7cd 45%,#dcc4a1 100%); }
+.flower.gold  .petal{ background:radial-gradient(circle at 50% 80%,#ffe9a8 0%,#f2c25c 45%,#c08e21 100%); }
+
+/* ============================================================
+   BOUQUET  (your Flower.jpg + floating roses)
+   ============================================================ */
+.bouquet-stage{ display:grid; justify-items:center; gap:16px; text-align:center; }
+
+.bouquet{
+  position:relative; width:360px; height:480px;
+  background:none; border:0; padding:0; cursor:pointer;
+  transform:scale(var(--bs,1));
+  -webkit-tap-highlight-color:transparent;
+}
+.bouquet__inner{
+  position:relative; width:360px; height:480px;
+  animation:floaty 6s ease-in-out infinite;
+}
+@keyframes floaty{
+  0%,100%{ transform:translateY(0) rotate(0deg); }
+  50%{ transform:translateY(-12px) rotate(1deg); }
+}
+
+/* Your flower image — the hero */
+.bouquet__img{
+  position:relative; z-index:2;
+  width:100%; height:100%;
+  object-fit:contain; object-position:center bottom;
+  filter:drop-shadow(0 26px 50px rgba(0,0,0,.65));
+  user-select:none; -webkit-user-drag:none;
+  pointer-events:none;
+}
+
+/* Soft glow behind the bouquet */
+.bouquet__glow{
+  position:absolute; inset:0; z-index:1;
+  background:radial-gradient(circle at 50% 55%, rgba(255,143,168,.38) 0%, transparent 65%);
+  filter:blur(20px);
+  animation:breathe 4s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes breathe{
+  0%,100%{ opacity:.6; transform:scale(.95); }
+  50%{ opacity:1; transform:scale(1.05); }
+}
+
+/* Floating CSS roses around your photo */
+.bouquet__flowers{
+  position:absolute; inset:0; z-index:3;
+  pointer-events:none;
+  opacity:.55;
+}
+.bouquet .flower{
+  position:absolute;
+  transform:translate(-50%,-50%) scale(var(--s,1));
+  animation:sway 5.5s ease-in-out infinite;
+}
+@keyframes sway{
+  0%,100%{ transform:translate(-50%,-50%) scale(var(--s,1)) rotate(-5deg); }
+  50%{ transform:translate(-50%,-50%) scale(var(--s,1)) rotate(5deg); }
+}
+
+.hint{ font-size:.82rem; color:var(--muted); letter-spacing:.06em; opacity:.8; margin:0; }
+
+/* ============================================================
+   CHASE
+   ============================================================ */
+.chase{ position:relative; width:100%; overflow:hidden; }
+.chase__head{
+  position:absolute; top:max(28px,6vh); left:50%; translate:-50% 0;
+  width:min(92%,560px); text-align:center;
+}
+.chase__sub{ color:var(--muted); font-size:.92rem; margin:0; }
+.chase-btn{
+  position:absolute; left:50%; top:50%;
+  translate:-50% -50%;
+  font-family:inherit; font-size:.9rem; font-weight:500;
+  padding:.85rem 1.5rem; border-radius:999px;
+  border:1px solid rgba(255,143,168,.45);
+  background:linear-gradient(135deg,rgba(255,107,141,.22),rgba(211,29,76,.22));
+  color:var(--cream); cursor:pointer;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  box-shadow:0 10px 28px rgba(0,0,0,.4);
+  transition:left .6s var(--ease), top .6s var(--ease),
+             opacity .35s ease, transform .35s ease;
+  -webkit-tap-highlight-color:transparent;
+  white-space:nowrap;
+}
+.chase-btn:hover{ border-color:rgba(255,143,168,.85); }
+.chase-btn.is-hidden{ opacity:0; pointer-events:none; transform:scale(.6); }
+
+/* ============================================================
+   GARDEN
+   ============================================================ */
+.garden{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:14px; margin:1.4rem 0 .6rem;
+}
+.garden-item{
+  display:grid; justify-items:center; gap:8px;
+  padding:14px 8px 16px;
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--line);
+  border-radius:18px; cursor:pointer;
+  color:var(--cream); font-family:inherit;
+  transition:transform .3s var(--ease), background .3s, border-color .3s;
+  -webkit-tap-highlight-color:transparent;
+}
+.garden-item:hover{ transform:translateY(-4px); background:rgba(255,255,255,.07); }
+.garden-item.opened{ border-color:rgba(255,143,168,.6); background:rgba(232,71,111,.12); }
+.garden-item span{ font-size:.78rem; color:var(--muted); letter-spacing:.04em; }
+.garden-item .flower{
+  transform:scale(.72);
+  animation:sway2 5s ease-in-out infinite;
+}
+@keyframes sway2{
+  0%,100%{ transform:scale(.72) rotate(-3deg); }
+  50%{ transform:scale(.72) rotate(3deg); }
+}
+
+/* ============================================================
+   INPUT
+   ============================================================ */
+.input{
+  width:100%; padding:1rem 1.2rem; margin:1rem 0 .2rem;
+  border-radius:14px; border:1px solid var(--line);
+  background:rgba(255,255,255,.05); color:var(--cream);
+  font-family:inherit; font-size:1rem; outline:none;
+  transition:border-color .25s, box-shadow .25s;
+}
+.input::placeholder{ color:rgba(255,243,234,.38); }
+.input:focus{ border-color:rgba(255,143,168,.7); box-shadow:0 0 0 4px rgba(232,71,111,.15); }
+
+/* ============================================================
+   CHARGES
+   ============================================================ */
+.charges{
+  list-style:none; padding:0; margin:0 auto 1.4rem;
+  display:grid; gap:.55rem; font-size:.92rem; color:var(--muted);
+  text-align:left; max-width:340px;
+}
+.charges li{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:12px; padding:.6rem .9rem;
+}
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+.countdown{
+  font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:clamp(5rem,24vw,9rem); line-height:1; margin:.2em 0 .1em;
+  color:var(--rose-2);
+  text-shadow:0 0 60px rgba(232,71,111,.55);
+  font-variant-numeric:tabular-nums;
+}
+.countdown.pulse{ animation:tick .5s var(--ease); }
+@keyframes tick{
+  0%{ transform:scale(1.25); opacity:.5; }
+  100%{ transform:scale(1); opacity:1; }
+}
+
+/* ============================================================
+   FINAL
+   ============================================================ */
+.final-words p{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(1.05rem,3.4vw,1.22rem);
+  line-height:1.85; color:var(--muted); margin:0 0 1em;
+}
+.sign{ font-size:clamp(1.6rem,5vw,2rem); color:var(--rose-2); margin:1.2em 0 0; }
+
+/* ============================================================
+   OVERLAY (white → black)
+   ============================================================ */
+.overlay{
+  position:fixed; inset:0; z-index:100;
+  background:#ffffff; opacity:0; pointer-events:none;
+  transition:opacity 1s ease, background-color 3.2s ease;
+}
+.overlay.on{ opacity:1; pointer-events:auto; }
+.overlay.black{ background:#000000; }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal{
+  position:fixed; inset:0; z-index:80;
+  display:grid; place-items:center; padding:20px;
+  background:rgba(8,1,6,.74);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  opacity:0; visibility:hidden;
+  transition:opacity .4s ease, visibility .4s;
+}
+.modal.open{ opacity:1; visibility:visible; }
+.modal__box{
+  width:min(100%,440px); text-align:center;
+  padding:clamp(24px,6vw,40px);
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:linear-gradient(160deg, rgba(70,15,35,.95), rgba(30,6,17,.97));
+  box-shadow:0 30px 80px rgba(0,0,0,.65);
+  transform:translateY(18px) scale(.97);
+  transition:transform .45s var(--ease);
+}
+.modal.open .modal__box{ transform:none; }
+.modal__flower{ display:grid; place-items:center; margin-bottom:.4rem; }
+.modal__box h3{
+  font-family:"Cormorant Garamond",serif; font-size:1.5rem;
+  margin:.2em 0 .5em; color:var(--rose-2);
+}
+.modal__box p{
+  font-family:"Cormorant Garamond",serif; font-size:1.12rem;
+  line-height:1.75; color:var(--muted); margin:0 0 1.4rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:430px){ .bouquet{ --bs:.85; } }
+@media (max-width:360px){ .bouquet{ --bs:.72; } }
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 · INTRO ============ -->
+<section class="screen active" id="screen-intro">
+  <div class="card">
+    <p class="kicker">Before you scroll… one small thing</p>
+    <h1 class="script big">Hey <span data-name></span></h1>
+    <p class="lead">
+      Some things are too big to say out loud.<br>
+      So I wrote them down, one page at a time. 💌
+    </p>
+    <p class="lead small">Take your time with this one.</p>
+    <div class="row">
+      <button class="btn btn-primary" data-goto="screen-bouquet">I'm ready ✨</button>
+      <button class="btn btn-ghost" id="btnNotReady">Not yet…</button>
+    </div>
+    <p class="note" id="teaseNote"></p>
+  </div>
+</section>
+
+<!-- ============ 2 · BOUQUET (your Flower.jpg) ============ -->
+<section class="screen" id="screen-bouquet">
+  <div class="bouquet-stage">
+    <p class="kicker">Tap the bouquet 🌹</p>
+    <button class="bouquet" id="bouquet" aria-label="Open the bouquet">
+      <div class="bouquet__inner">
+        <div class="bouquet__glow"></div>
+        <img class="bouquet__img" src="Flower.jpg" alt="A bouquet of roses for you">
+        <div class="bouquet__flowers" id="bouquetFlowers"></div>
+      </div>
+    </button>
+    <p class="hint">it's alive, I promise 💫</p>
+  </div>
+</section>
+
+<!-- ============ 3 · MESSAGE ============ -->
+<section class="screen" id="screen-message">
+  <div class="card">
+    <p class="kicker">For the girl who loves flowers</p>
+    <h2>I know you like flower bouquets…</h2>
+    <p class="lead">
+      …and this beautiful bouquet is for you, my
+      <span class="script accent" data-name></span> 🌹
+    </p>
+    <p class="lead small">Every flower in it is a sentence I was too shy to say out loud.</p>
+    <button class="btn btn-primary" data-goto="screen-chase">There's more 💫</button>
+  </div>
+</section>
+
+<!-- ============ 4 · CATCH THE BUTTON ============ -->
+<section class="screen screen--full" id="screen-chase">
+  <div class="chase" id="chase">
+    <div class="chase__head">
+      <p class="kicker">One of these is your future husband</p>
+      <p class="chase__sub" id="chaseSub">Catch him. He's a little shy 🏃‍♂️💨</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · GARDEN OF FLOWERS ============ -->
+<section class="screen" id="screen-garden">
+  <div class="card">
+    <p class="kicker">A small garden, grown for you</p>
+    <h2>Pick a flower 🌸</h2>
+    <p class="lead small">Each one is holding a secret about you.</p>
+    <div class="garden" id="garden"></div>
+    <button class="btn btn-primary" id="btnGardenNext" hidden>Continue →</button>
+  </div>
+</section>
+
+<!-- ============ 6 · RESTRICTED AREA ============ -->
+<section class="screen" id="screen-restricted">
+  <div class="card">
+    <p class="kicker">⚠️ Restricted area</p>
+    <h2>Why did you come here?</h2>
+    <p class="lead small">This place is off-limits. Answer honestly.</p>
+    <input class="input" id="reasonInput" placeholder="Type your reason…" autocomplete="off" maxlength="120">
+    <button class="btn btn-primary wide" id="btnSubmitReason">Tell the truth</button>
+    <p class="note" id="reasonNote"></p>
+  </div>
+</section>
+
+<!-- ============ 7 · ARREST ============ -->
+<section class="screen" id="screen-arrest">
+  <div class="card">
+    <p class="kicker">🚨 Official notice 🚨</p>
+    <h2>You are under arrest 🚔</h2>
+    <p class="lead">
+      You have been caught for the crime of <strong>stealing someone's heart</strong> 💘
+    </p>
+    <ul class="charges">
+      <li>😍 Being unfairly beautiful</li>
+      <li>🙂 Smiling too much</li>
+      <li>🏠 Living rent-free in my head</li>
+      <li>💞 Making me fall harder every day</li>
+    </ul>
+    <button class="btn btn-primary" id="btnArrestNext">What happens now? 😳</button>
+  </div>
+</section>
+
+<!-- ============ 8 · CUSTODY A ============ -->
+<section class="screen" id="screen-custody-a">
+  <div class="card">
+    <p class="kicker">🔒 Custody report</p>
+    <h2>Do you want to know where you are being kept in custody?</h2>
+    <div class="row">
+      <button class="btn btn-primary" data-goto="screen-custody-b">Yes, tell me 😳</button>
+      <button class="btn btn-ghost" data-tease="You don't really have a choice 😌">No</button>
+    </div>
+    <p class="note" data-tease-out></p>
+  </div>
+</section>
+
+<!-- ============ 9 · CUSTODY B ============ -->
+<section class="screen" id="screen-custody-b">
+  <div class="card">
+    <p class="kicker">⚖️ Sentence passed</p>
+    <h2>Life sentence 📜</h2>
+    <p class="lead">
+      You are arrested for <strong>life</strong> — and for life you will be kept in custody.
+      No bail. No appeal. No escape. ❤️
+    </p>
+    <button class="btn btn-primary" data-goto="screen-custody-c">Wait… where? 😳</button>
+  </div>
+</section>
+
+<!-- ============ 10 · CUSTODY C ============ -->
+<section class="screen" id="screen-custody-c">
+  <div class="card">
+    <p class="kicker">🔎 One last question</p>
+    <h2>Do you want to know in which custody you have been kept?</h2>
+    <div class="row">
+      <button class="btn btn-primary" data-goto="screen-custody-d">Yes, show me 🔑</button>
+      <button class="btn btn-ghost" data-tease="Too late, you're already inside 😌">No</button>
+    </div>
+    <p class="note" data-tease-out></p>
+  </div>
+</section>
+
+<!-- ============ 11 · CUSTODY D ============ -->
+<section class="screen" id="screen-custody-d">
+  <div class="card">
+    <p class="kicker">🏛️ Custody location revealed</p>
+    <h2 class="script huge accent">Tausif's Heart Custody ❤️</h2>
+    <p class="lead">
+      Maximum security. Zero escape.<br>
+      Unlimited love. 💞
+    </p>
+    <button class="btn btn-primary" data-goto="screen-custody-e">Take me on a tour 🔑</button>
+  </div>
+</section>
+
+<!-- ============ 12 · CUSTODY E ============ -->
+<section class="screen" id="screen-custody-e">
+  <div class="card">
+    <p class="kicker">🎟️ VIP pass</p>
+    <h2>Do you want to take a tour of Tausif's custody?</h2>
+    <div class="row">
+      <button class="btn btn-primary" id="btnStartTour">Yes, take me 🚔</button>
+      <button class="btn btn-ghost" data-tease="The tour comes to you either way 😌">No</button>
+    </div>
+    <p class="note" data-tease-out></p>
+  </div>
+</section>
+
+<!-- ============ 13 · COUNTDOWN ============ -->
+<section class="screen" id="screen-timer">
+  <div class="card">
+    <p class="kicker">Preparing your escort 🚔</p>
+    <div class="countdown" id="countdown">10</div>
+    <p class="lead">We are taking you to the tour…</p>
+  </div>
+</section>
+
+<!-- ============ 14 · FINAL ============ -->
+<section class="screen" id="screen-final">
+  <div class="card">
+    <p class="kicker">Welcome to your lifetime custody ❤️</p>
+    <h2 class="script huge accent">Cell No. 1 · Tausif's Heart</h2>
+
+    <!-- ✍️  YOUR LOVE LETTER — all your words, kept as you wrote them  ✍️ -->
+    <div class="final-words">
+      <p>Welcome home, My sweetheart <span class="accent">Haduu</span>.</p>
+
+      <p>This custody has no walls, no locks, and no release date — only a heartbeat that keeps your name on repeat.</p>
+
+      <p>Every day with you is a tour I'd happily take again: the same corridors, the same warmth, the same person waiting at the end of it.</p>
+
+      <p>You are not my prisoner. You are my home. And I am never letting you go.</p>
+
+      <p>Our first meet, our first contact — our first meeting was an amazing thing that has happened in my life. When I saw you, I got melted…</p>
+
+      <p>I really love you so much. I love the way you care for me, love me, support me, motivate me, guide me. I really love you and everything about you.</p>
+
+      <p>You are a damn pretty girl. You made me a strong person. You made me something special.</p>
+
+      <p>I love you — your face, your lips, your eyes, your nose. And in the right way, I want to tell you that I love your breasts and your that… I love to kiss your breasts, stomach and your vag… don't take me bad. Just in the right way, I love all your things.</p>
+
+      <p>More than this, I really love your soul, my sweetheart. For you I can do anything… I really love you, my sweet baby.</p>
+    </div>
+    <!-- ✍️  END OF YOUR LETTER  ✍️ -->
+
+    <p class="sign script">— <span data-your-name></span></p>
+  </div>
+</section>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<!-- FLOWER MODAL -->
+<div class="modal" id="flowerModal" role="dialog" aria-modal="true">
+  <div class="modal__box">
+    <div class="modal__flower" id="modalFlower"></div>
+    <h3 id="modalTitle"></h3>
+    <p id="modalLine"></p>
+    <button class="btn btn-ghost" id="modalClose">Close ✕</button>
+  </div>
+</div>
+
+<noscript>
+  <p style="color:#fff;text-align:center;padding:40px;font-family:sans-serif">
+    Please enable JavaScript to open this surprise 💌
+  </p>
+</noscript>
+
+<script>
+/* ============================================================
+   ✏️  CONFIG — change these lines only
+   ============================================================ */
+const CONFIG = {
+  herName:        "My sweetheart Haduu",    // 👈 her name
+  yourName:       "Tausif",    // 👈 your name
+  chaseClicks:    3,           // clicks before the page opens
+  countdownFrom:  10,          // tour countdown seconds
+  whiteScreenMs:  10000,       // pure-white screen duration
+};
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+
+/* ============================================================
+   Screen router
+   ============================================================ */
+function go(id){
+  const next = document.getElementById(id);
+  if (!next) return;
+  $$('.screen').forEach((s) => s.classList.toggle('active', s === next));
+  next.scrollTop = 0;
+}
+
+/* ============================================================
+   Inject names
+   ============================================================ */
+$$('[data-name]').forEach((el) => (el.textContent = CONFIG.herName));
+$$('[data-your-name]').forEach((el) => (el.textContent = CONFIG.yourName));
+
+/* ============================================================
+   Generic data-goto buttons
+   ============================================================ */
+$$('[data-goto]').forEach((btn) =>
+  btn.addEventListener('click', () => go(btn.dataset.goto))
+);
+
+/* ============================================================
+   Playful "No" buttons
+   ============================================================ */
+$$('[data-tease]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const note = btn.closest('.card').querySelector('[data-tease-out]');
+    if (note) note.textContent = btn.dataset.tease;
+    btn.disabled = true;
+    btn.style.opacity = '.45';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.style.opacity = '';
+    }, 1600);
+  });
+});
+
+/* ============================================================
+   1 · INTRO — "Not yet" dodges
+   ============================================================ */
+(() => {
+  const btn  = $('#btnNotReady');
+  const note = $('#teaseNote');
+  const lines = [
+    'Are you sure? It took me a while 🥺',
+    'It has flowers in it… 🌹',
+    "Okay, one more try and I'll ask again 😌",
+  ];
+  let i = 0;
+  btn.addEventListener('click', () => {
+    note.textContent = lines[Math.min(i, lines.length - 1)];
+    i++;
+    btn.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 12 - 6}px)`;
+    if (i >= lines.length) {
+      btn.style.opacity = '.4';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.style.opacity = '';
+        btn.disabled = false;
+      }, 2200);
+    }
+  });
+})();
+
+/* ============================================================
+   2 · FLOWER FACTORY
+   ============================================================ */
+function makeFlower(kind = 'rose', scale = 1){
+  const f = document.createElement('div');
+  f.className = `flower ${kind}`;
+  if (scale !== 1) f.style.setProperty('--s', scale);
+
+  for (let i = 0; i < 6; i++){
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.style.setProperty('--r', `${i * 60}deg`);
+    f.appendChild(p);
+  }
+  for (let i = 0; i < 6; i++){
+    const p = document.createElement('span');
+    p.className = 'petal petal--inner';
+    p.style.setProperty('--r', `${i * 60 + 30}deg`);
+    f.appendChild(p);
+  }
+  const core = document.createElement('span');
+  core.className = 'core';
+  f.appendChild(core);
+
+  return f;
+}
+
+/* ============================================================
+   3 · BOUQUET — floating roses around your Flower.jpg
+   ============================================================ */
+(() => {
+  const flowerLayer = $('#bouquetFlowers');
+
+  const SURROUND = [
+    { x: 12, y: 18, s: .55, k: 'rose'  },
+    { x: 88, y: 22, s: .55, k: 'blush' },
+    { x:  6, y: 62, s: .50, k: 'blush' },
+    { x: 94, y: 66, s: .50, k: 'rose'  },
+    { x: 50, y:  4, s: .45, k: 'gold'  },
+    { x: 24, y: 84, s: .50, k: 'cream' },
+    { x: 76, y: 86, s: .50, k: 'rose'  },
+  ];
+
+  SURROUND.forEach((f, i) => {
+    const flower = makeFlower(f.k, f.s);
+    flower.style.left = `${f.x}%`;
+    flower.style.top  = `${f.y}%`;
+    flower.style.setProperty('--s', f.s);
+    flower.style.animationDelay = `${(i * .35).toFixed(2)}s`;
+    flowerLayer.appendChild(flower);
+  });
+
+  const bouquet = $('#bouquet');
+  const openBouquet = () => go('screen-message');
+  bouquet.addEventListener('click', openBouquet);
+  bouquet.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBouquet(); }
+  });
+})();
+
+/* ============================================================
+   4 · CATCH THE BUTTON
+   ============================================================ */
+(() => {
+  const stage = $('#chase');
+  const sub   = $('#chaseSub');
+
+  const SLOTS = [
+    { x: 22, y: 30 }, { x: 72, y: 26 }, { x: 30, y: 62 },
+    { x: 74, y: 66 }, { x: 50, y: 44 }, { x: 46, y: 80 },
+    { x: 18, y: 50 }, { x: 82, y: 48 },
+  ];
+
+  let used = [];
+  const nextSlot = () => {
+    const pool = SLOTS.filter((s) => !used.includes(s));
+    const pick = pool.length
+      ? pool[Math.floor(Math.random() * pool.length)]
+      : SLOTS[Math.floor(Math.random() * SLOTS.length)];
+    used.push(pick);
+    if (used.length > 4) used.shift();
+    return pick;
+  };
+
+  const buttons = [];
+  for (let i = 0; i < 3; i++){
+    const b = document.createElement('button');
+    b.className = 'chase-btn';
+    b.type = 'button';
+    b.textContent = `My future husband ${CONFIG.yourName}`;
+    const slot = nextSlot();
+    b.style.left = `${slot.x}%`;
+    b.style.top  = `${slot.y}%`;
+    stage.appendChild(b);
+    buttons.push(b);
+  }
+
+  const taunts = [
+    "He's a little shy 🏃‍♂️💨",
+    'Almost! Try again 😄',
+    'One more time… 👀',
+  ];
+
+  let clicks = 0;
+  let locked = false;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (locked) return;
+      clicks++;
+
+      if (clicks >= CONFIG.chaseClicks){
+        locked = true;
+        btn.textContent = 'Caught me 🥰';
+        await wait(420);
+        go('screen-garden');
+        return;
+      }
+
+      locked = true;
+      btn.classList.add('is-hidden');
+      sub.textContent = taunts[Math.min(clicks, taunts.length - 1)];
+
+      await wait(3000);
+
+      const slot = nextSlot();
+      btn.style.left = `${slot.x}%`;
+      btn.style.top  = `${slot.y}%`;
+      btn.classList.remove('is-hidden');
+
+      await wait(650);
+      locked = false;
+    });
+  });
+})();
+
+/* ============================================================
+   5 · GARDEN OF FLOWERS
+   ============================================================ */
+(() => {
+  const FLOWERS = [
+    { k:'rose',  name:'Red Rose',        line:'You are the rose in a garden full of ordinary flowers.' },
+    { k:'blush', name:'Blush Peony',     line:'Soft, warm, and impossible not to love — that is you, every single day.' },
+    { k:'cream', name:'Cream Lily',      line:'My heart was quiet until you walked in and made it loud.' },
+    { k:'gold',  name:'Golden Sunflower',line:'You are the reason my mornings feel like sunlight.' },
+    { k:'rose',  name:'Crimson Tulip',   line:'Every promise I keep, I keep because it has your name on it.' },
+    { k:'cream', name:'White Jasmine',   line:'Your name is the sweetest thing my heart has ever learned.' },
+  ];
+
+  const garden   = $('#garden');
+  const nextBtn  = $('#btnGardenNext');
+  const modal    = $('#flowerModal');
+  const mFlower  = $('#modalFlower');
+  const mTitle   = $('#modalTitle');
+  const mLine    = $('#modalLine');
+  const mClose   = $('#modalClose');
+
+  let opened = 0;
+
+  FLOWERS.forEach((f) => {
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'garden-item';
+    item.appendChild(makeFlower(f.k, 1));
+
+    const label = document.createElement('span');
+    label.textContent = f.name;
+    item.appendChild(label);
+
+    item.addEventListener('click', () => {
+      mFlower.innerHTML = '';
+      mFlower.appendChild(makeFlower(f.k, 1));
+      mTitle.textContent = f.name;
+      mLine.textContent  = f.line;
+      modal.classList.add('open');
+
+      if (!item.classList.contains('opened')){
+        item.classList.add('opened');
+        opened++;
+        if (opened >= 3 && nextBtn.hidden){
+          nextBtn.hidden = false;
+          nextBtn.animate(
+            [{ opacity: 0, transform: 'translateY(8px)' },
+             { opacity: 1, transform: 'none' }],
+            { duration: 500, easing: 'ease-out' }
+          );
+        }
+      }
+    });
+
+    garden.appendChild(item);
+  });
+
+  const closeModal = () => modal.classList.remove('open');
+  mClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  nextBtn.addEventListener('click', () => go('screen-restricted'));
+})();
+
+/* ============================================================
+   6 · RESTRICTED AREA
+   ============================================================ */
+(() => {
+  const input = $('#reasonInput');
+  const btn   = $('#btnSubmitReason');
+  const note  = $('#reasonNote');
+
+  const submit = () => {
+    const value = input.value.trim();
+    if (!value){
+      note.textContent = 'You have to tell the truth 😌';
+      input.focus();
+      return;
+    }
+    note.textContent = 'Recording your statement… 📝';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.disabled = false;
+      note.textContent = '';
+      go('screen-arrest');
+    }, 1000);
+  };
+
+  btn.addEventListener('click', submit);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+})();
+
+/* ============================================================
+   7 · ARREST → WHITE → BLACK → CUSTODY
+   ============================================================ */
+(() => {
+  const overlay = $('#overlay');
+  const btn = $('#btnArrestNext');
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+
+    overlay.classList.add('on');
+    await wait(CONFIG.whiteScreenMs);
+
+    overlay.classList.add('black');
+    await wait(3300);
+
+    go('screen-custody-a');
+    await wait(250);
+    overlay.classList.remove('on');
+    await wait(1200);
+    overlay.classList.remove('black');
+
+    btn.disabled = false;
+  });
+})();
+
+/* ============================================================
+   8 · TOUR COUNTDOWN
+   ============================================================ */
+(() => {
+  const btn = $('#btnStartTour');
+  const el  = $('#countdown');
+
+  btn.addEventListener('click', async () => {
+    go('screen-timer');
+    await wait(600);
+
+    let n = CONFIG.countdownFrom;
+    el.textContent = n;
+
+    const timer = setInterval(() => {
+      n--;
+      el.textContent = n > 0 ? n : '0';
+      el.classList.remove('pulse');
+      void el.offsetWidth;
+      el.classList.add('pulse');
+
+      if (n <= 0){
+        clearInterval(timer);
+        setTimeout(() => go('screen-final'), 800);
+      }
+    }, 1000);
+  });
+})();
+</script>
+</body>
+</html>
